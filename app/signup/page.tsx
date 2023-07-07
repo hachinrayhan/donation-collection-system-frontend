@@ -1,22 +1,41 @@
-// components/SignupForm.tsx
 "use client";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const SignupForm = () => {
+  const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(name, email, password);
+    try {
+      const response = await axios.post("http://localhost:5000/users/signup", {
+        name,
+        email,
+        password,
+      });
 
-    // Perform signup logic, e.g., make an API request to register the user
+      console.log(response.data); // Handle the response as needed
 
-    // Reset form fields
-    setName("");
-    setEmail("");
-    setPassword("");
+      toast.success("SignUp Successful!", {
+        duration: 5000,
+        position: "top-center",
+      });
+
+      // Navigate to the login page
+      router.push("/login");
+
+      // Reset form fields
+      setName("");
+      setEmail("");
+      setPassword("");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

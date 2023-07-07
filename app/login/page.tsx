@@ -1,7 +1,11 @@
 "use client";
+import { useRouter } from "next/navigation";
+import axios from "axios";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const LoginForm = () => {
+  const router = useRouter();
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -15,10 +19,22 @@ const LoginForm = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     // Login submission logic
+    const response = await axios.post(
+      "http://localhost:5000/users/login",
+      credentials
+    );
+    console.log(response.data);
+
+    toast.success("Login Successful!", {
+      duration: 5000,
+      position: "top-center",
+    });
+
+    router.push("/");
 
     // Reset form fields
     setCredentials({
@@ -29,7 +45,7 @@ const LoginForm = () => {
 
   return (
     <div className="max-w-md mx-auto mt-8">
-      <h1 className="text-2xl font-bold mb-4">Login</h1>
+      <h1 className="text-2xl font-bold mb-4">Please Login to continue</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="email" className="block mb-2">
           Email:

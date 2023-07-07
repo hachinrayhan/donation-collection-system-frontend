@@ -2,21 +2,28 @@
 "use client";
 import { useState, ChangeEvent, FormEvent } from "react";
 import axios from "axios";
+import DonationReport from "./summary/page";
+import toast from "react-hot-toast";
 
 interface Donation {
+  id: number;
   name: string;
   email: string;
   mobileNumber: string;
-  amount: string;
+  amount: number;
 }
 
 const DonationForm = () => {
   const [donation, setDonation] = useState<Donation>({
+    id: 0,
     name: "",
     email: "",
     mobileNumber: "",
-    amount: "",
+    amount: 0,
   });
+
+  const [showReport, setShowReport] = useState(false);
+  const [reportData, setReportData] = useState<Donation | null>(null);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setDonation({ ...donation, [e.target.name]: e.target.value });
@@ -26,14 +33,33 @@ const DonationForm = () => {
     e.preventDefault();
     try {
       // Make an API request to create a new donation
-      const response = await axios.post("/api/donations", donation);
+      const response = await axios.post(
+        "http://localhost:5000/donations",
+        donation
+      );
       console.log(response.data); // Handle the response as needed
+
+      const responseData = response.data;
+
+      toast.success("Jazakallahu Khairan! Thank you for your donation.", {
+        duration: 5000,
+        position: "top-center",
+      });
+
+      // Set the report data and show the report page
+      setReportData(responseData);
+      setShowReport(true);
+
       // Reset the form after successful donation
-      setDonation({ name: "", email: "", mobileNumber: "", amount: "" });
+      setDonation({ id: 0, name: "", email: "", mobileNumber: "", amount: 0 });
     } catch (error) {
       console.error(error);
     }
   };
+
+  if (showReport && reportData) {
+    return <DonationReport donationData={reportData} />;
+  }
 
   return (
     <div className="max-w-md mx-auto mt-8">
