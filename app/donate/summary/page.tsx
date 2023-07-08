@@ -12,7 +12,9 @@ interface DonationReportProps {
   };
 }
 
-const DonationReport: React.FC<DonationReportProps> = ({ donationData }) => {
+export const DonationReport: React.FC<DonationReportProps> = ({
+  donationData,
+}) => {
   const isoTime: any = donationData.time;
   const localTime: string = format(
     new Date(isoTime),
@@ -48,5 +50,3 @@ const DonationReport: React.FC<DonationReportProps> = ({ donationData }) => {
     </div>
   );
 };
-
-export default DonationReport;
