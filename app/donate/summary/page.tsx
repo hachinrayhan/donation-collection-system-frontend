@@ -1,4 +1,5 @@
 import React from "react";
+import "intl/locale-data/jsonp/en-US";
 
 interface DonationReportProps {
   donationData: {
