@@ -2,7 +2,7 @@
 "use client";
 import { useState, ChangeEvent, FormEvent } from "react";
 import axios from "axios";
-import { DonationReport } from "./summary/page";
+import DonationReport from "./summary/page";
 import toast from "react-hot-toast";
 
 interface Donation {

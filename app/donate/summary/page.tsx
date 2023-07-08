@@ -1,5 +1,6 @@
 import React from "react";
 import { format } from "date-fns";
+import type { NextPage } from "next";
 
 interface DonationReportProps {
   donationData: {
@@ -12,9 +13,7 @@ interface DonationReportProps {
   };
 }
 
-export const DonationReport: React.FC<DonationReportProps> = ({
-  donationData,
-}) => {
+const DonationReport: NextPage<DonationReportProps> = ({ donationData }) => {
   const isoTime: any = donationData.time;
   const localTime: string = format(
     new Date(isoTime),
@@ -50,3 +49,5 @@ export const DonationReport: React.FC<DonationReportProps> = ({
     </div>
   );
 };
+
+export default DonationReport;
