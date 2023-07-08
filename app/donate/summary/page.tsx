@@ -1,5 +1,5 @@
 import React from "react";
-import "intl/locale-data/jsonp/en-US";
+import { format } from "date-fns";
 
 interface DonationReportProps {
   donationData: {
@@ -14,15 +14,11 @@ interface DonationReportProps {
 
 const DonationReport: React.FC<DonationReportProps> = ({ donationData }) => {
   const isoTime: any = donationData.time;
-  const localTime: any = new Date(isoTime).toLocaleDateString("en-US", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-    hour: "numeric",
-    minute: "numeric",
-    second: "numeric",
-    hour12: true,
-  });
+  const localTime: string = format(
+    new Date(isoTime),
+    "dd MMMM yyyy, hh:mm:ss a"
+  );
+
   return (
     <div className="max-w-md mx-auto mt-8">
       <h1 className="text-2xl font-bold mb-4">Donation Summary</h1>
