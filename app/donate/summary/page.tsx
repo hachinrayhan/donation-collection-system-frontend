@@ -1,20 +1,19 @@
 import React from "react";
 import { format } from "date-fns";
-import type { NextPage } from "next";
 
 interface DonationReportProps {
-  donationData: {
+  params: {
     id: number;
     name: string;
     email: string;
     mobileNumber: string;
     amount: number;
-    time: string;
+    time?: string;
   };
 }
 
-const DonationReport = ({ donationData }: DonationReportProps) => {
-  const isoTime: any = donationData.time;
+const DonationReport = ({ params }: DonationReportProps) => {
+  const isoTime: any = params.time;
   const localTime: string = format(
     new Date(isoTime),
     "dd MMMM yyyy, hh:mm:ss a"
@@ -25,22 +24,22 @@ const DonationReport = ({ donationData }: DonationReportProps) => {
       <h1 className="text-2xl font-bold mb-4">Donation Summary</h1>
       <div className="bg-white shadow-md rounded-md p-4">
         <p className="mb-2">
-          <span className="font-bold">ID:</span> {donationData.id}
+          <span className="font-bold">ID:</span> {params.id}
         </p>
         <p className="mb-2">
-          <span className="font-bold">Name:</span> {donationData.name}
+          <span className="font-bold">Name:</span> {params.name}
         </p>
         <p className="mb-2">
-          <span className="font-bold">Email:</span> {donationData.email}
+          <span className="font-bold">Email:</span> {params.email}
         </p>
         <p className="mb-2">
           <span className="font-bold">Mobile Number:</span>{" "}
-          {donationData.mobileNumber}
+          {params.mobileNumber}
         </p>
         <p className="mb-2">
-          <span className="font-bold">Amount:</span> {donationData.amount}
+          <span className="font-bold">Amount:</span> {params.amount}
         </p>
-        {donationData.time && (
+        {params.time && (
           <p className="mb-2">
             <span className="font-bold">Date & Time:</span> {localTime}
           </p>
