@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { memo, useState } from "react";
 import { format } from "date-fns";
 
 interface DonationReportProps {
@@ -8,16 +9,13 @@ interface DonationReportProps {
     email: string;
     mobileNumber: string;
     amount: number;
-    time?: string;
+    time?: any;
   };
 }
 
 const DonationReport = ({ params }: DonationReportProps) => {
-  const isoTime: any = params.time;
-  const localTime: string = format(
-    new Date(isoTime),
-    "dd MMMM yyyy, hh:mm:ss a"
-  );
+  const date: Date = new Date(params.time);
+  const localTime = format(date, "dd MMMM yyyy, hh:mm:ss a");
 
   return (
     <div className="max-w-md mx-auto mt-8">
@@ -49,4 +47,4 @@ const DonationReport = ({ params }: DonationReportProps) => {
   );
 };
 
-export default DonationReport;
+export default memo(DonationReport);
