@@ -11,6 +11,7 @@ interface Donation {
   email: string;
   mobileNumber: string;
   amount: number;
+  time: string;
 }
 
 const DonationForm = () => {
@@ -20,6 +21,7 @@ const DonationForm = () => {
     email: "",
     mobileNumber: "",
     amount: 0,
+    time: "",
   });
 
   const [showReport, setShowReport] = useState(false);
@@ -51,7 +53,14 @@ const DonationForm = () => {
       setShowReport(true);
 
       // Reset the form after successful donation
-      setDonation({ id: 0, name: "", email: "", mobileNumber: "", amount: 0 });
+      setDonation({
+        id: 0,
+        name: "",
+        email: "",
+        mobileNumber: "",
+        amount: 0,
+        time: "",
+      });
     } catch (error) {
       console.error(error);
     }

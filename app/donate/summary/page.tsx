@@ -9,7 +9,7 @@ interface DonationReportProps {
     email: string;
     mobileNumber: string;
     amount: number;
-    time?: string;
+    time: string;
   };
 }
 
