@@ -13,7 +13,7 @@ interface DonationReportProps {
   };
 }
 
-const DonationReport: NextPage<DonationReportProps> = ({ donationData }) => {
+const DonationReport = ({ donationData }: DonationReportProps) => {
   const isoTime: any = donationData.time;
   const localTime: string = format(
     new Date(isoTime),
