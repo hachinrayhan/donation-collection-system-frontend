@@ -1,5 +1,5 @@
 "use client";
-import React, { memo, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { format } from "date-fns";
 
 interface DonationReportProps {
@@ -14,7 +14,17 @@ interface DonationReportProps {
 }
 
 const DonationReport = ({ params }: DonationReportProps) => {
-  const date: Date = new Date(params.time);
+  //   const date: Date = new Date(params.time);
+  //   const localTime = format(date, "dd MMMM yyyy, hh:mm:ss a");
+
+  const [time, setTime]: any = useState(null);
+
+  useEffect(() => {
+    const unixTimestamp = Date.parse(params.time);
+    setTime(unixTimestamp);
+  }, [params.time]);
+
+  const date = new Date(time);
   const localTime = format(date, "dd MMMM yyyy, hh:mm:ss a");
 
   return (
