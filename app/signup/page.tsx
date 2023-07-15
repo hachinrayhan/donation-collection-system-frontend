@@ -13,11 +13,14 @@ const SignupForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/users/signup", {
-        name,
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "https://donation-collection-system-backend-hachinrayhan.vercel.app/users/signup",
+        {
+          name,
+          email,
+          password,
+        }
+      );
 
       console.log(response.data); // Handle the response as needed
 
